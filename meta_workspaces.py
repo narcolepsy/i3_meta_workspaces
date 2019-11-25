@@ -9,7 +9,6 @@ parser.add_argument("-m", "--meta",         help="Meta flag")
 parser.add_argument("-w", "--workspace",    help="Workspace flag")
 parser.add_argument("-mw","--move_window",  help="Move flag")
 parser.add_argument("-r", "--rename",       help="Rename Meta Workspace")
-parser.add_argument("-l", "--list",         help="List Meta Workspaces")
 args = parser.parse_args()
 
 # Now populate current meta-workspace info for given $HOST$SDISPLAY
@@ -71,6 +70,7 @@ def readWsList(meta,overwrite):
                         outline.append(line)
                         cur_ws_string = line
             else:
+                cur_ws_string = line
                 outline.append(line)
     if found == 0: #if we have scanned all lines and not found a match
         cmd = os.popen('zenity --entry').read()
@@ -158,12 +158,4 @@ if args.rename is not None:
     #update ws_list dictionary
     #write out cur_ws
     readWsList(meta,1)
-
-#List meta workspaces
-if args.list is not None:
-    #get meta value from cur_ws
-    meta = readMeta()
-    #update ws_list dictionary
-    #write out cur_ws
-    readWsList(meta,0)
 

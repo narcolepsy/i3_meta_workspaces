@@ -1,7 +1,9 @@
 ## **i3_meta_workspaces**
 
 This code enables multiple meta workspaces within your i3 window manager. It is very useful when working in multiple projects. 
-`$mod+X` usually allows you to access different workspaces. This script allows you to shift between different collections of workspaces i.e. meta workspaces. 
+`$mod+X` usually allows you to access different workspaces. This script allows you to shift between different collections of workspaces i.e. meta workspaces. An easy to modify configuration string is generated which can be used in your i3 status bar of choice:
+
+![Example Statusbar](i3_metaworkspace_status.png)
 
 ## **Usage**
 
@@ -59,4 +61,7 @@ bindsym $mod+Control+7 exec "python3 $script_path -m 7"
 bindsym $mod+Control+8 exec "python3 $script_path -m 8"
 bindsym $mod+Control+9 exec "python3 $script_path -m 9"
 bindsym $mod+Control+0 exec "python3 $script_path -m 0"
+
+#Rename current workspace
+bindsym $mod+Control+r exec "python3 $script_path -r 1"
 ```
