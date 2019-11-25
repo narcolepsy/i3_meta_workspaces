@@ -15,9 +15,13 @@ You can then navigate to different windows with:
 
 `$mod+X`
 
-And move windows within the meta workspace with:
+Move windows within the meta workspace with:
 
 `$mod+Shift+X`
+
+And rename meta workspaces with:
+
+`$mod+Alt+r`
 
 ## **Installation**
 
