@@ -1,6 +1,7 @@
 import os
 import argparse
 import subprocess
+import re
 from subprocess import call
 
 #Handle flags
@@ -46,7 +47,6 @@ def readWsList(meta,overwrite):
     with open(wslist) as fin:
         for line in fin:
             line = line.rstrip()
-            print(line + "-- overwrite: %d" % overwrite)
             if line.startswith(meta):
                 found = 1
                 if overwrite:
@@ -70,8 +70,11 @@ def readWsList(meta,overwrite):
                         outline.append(line)
                         cur_ws_string = line
             else:
-                cur_ws_string = line
-                outline.append(line)
+                #check if format of line is correct
+                if re.match('\d+:', line):
+                    cur_ws_string = line
+                    outline.append(line)
+
     if found == 0: #if we have scanned all lines and not found a match
         cmd = os.popen('zenity --entry').read()
         cur_ws_string = meta + ":" + cmd
@@ -89,16 +92,11 @@ def readWsList(meta,overwrite):
     myoutline = sorted(outline, key = lambda a: a.split(":")[0])
     for line in myoutline:
         a = line.split(":")
-        print(a)
         disp =  " " if (a[0] == meta) else "  "
         statusline += "["+disp+a[0]+":"+a[1]+"]"
 
-    print(statusline)
     with open(wsstr, 'w') as out:
         out.write(statusline)
-
-
-
 
 def writeMeta(value):
     if os.path.isfile(filename):
